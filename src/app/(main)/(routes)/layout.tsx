@@ -1,5 +1,5 @@
 import { NavigationSidebar } from "@/components/navigation";
-import { currentProfile } from "@/lib/current-profile";
+import { currentProfile } from "@/lib/currentProfile";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
