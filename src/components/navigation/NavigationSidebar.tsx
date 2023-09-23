@@ -3,7 +3,7 @@ import { UserButton } from "@clerk/nextjs";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { currentProfile } from "@/lib/current-profile";
+import { currentProfile } from "@/lib/currentProfile";
 import { db } from "@/lib/db";
 
 import ThemeToggle from "@/components/ThemeToggle";
