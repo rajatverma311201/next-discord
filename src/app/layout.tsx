@@ -1,10 +1,12 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils";
+import { ModalProvider, ThemeProvider } from "@/components/providers";
+
+const font = Open_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -19,13 +21,19 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className="bg-white dark:bg-[#313338]">
+                <body
+                    className={cn(
+                        font.className,
+                        "bg-white text-accent-foreground dark:bg-[#313338]",
+                    )}
+                >
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="dark"
                         enableSystem={false}
                         storageKey="next-discord-theme"
                     >
+                        <ModalProvider />
                         {children}
                     </ThemeProvider>
                 </body>
