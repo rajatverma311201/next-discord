@@ -4,9 +4,8 @@ import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-/*  COMPONENTS  */
 import {
     Dialog,
     DialogContent,
@@ -23,10 +22,10 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { FileUpload } from "@/components";
+import { FileUpload } from "@/components/file-upload";
+import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks";
 
 const formSchema = z.object({
@@ -38,12 +37,12 @@ const formSchema = z.object({
     }),
 });
 
-export const CreateServerModal = () => {
-    const { isOpen, onClose, type } = useModal();
-
-    const isModalOpen = isOpen && type === "createServer";
-
+export const EditServerModal = () => {
+    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
+
+    const isModalOpen = isOpen && type === "editServer";
+    const { server } = data;
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -53,23 +52,30 @@ export const CreateServerModal = () => {
         },
     });
 
+    useEffect(() => {
+        if (server) {
+            form.setValue("name", server.name);
+            form.setValue("imageUrl", server.imageUrl);
+        }
+    }, [server, form]);
+
     const isLoading = form.formState.isSubmitting;
+
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            await axios.patch(`/api/servers/${server?.id}`, values);
+
+            form.reset();
+            router.refresh();
+            onClose();
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     const handleClose = () => {
         form.reset();
         onClose();
-    };
-
-    const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        try {
-            await axios.post("/api/servers", values);
-
-            form.reset();
-            router.refresh();
-            handleClose();
-        } catch (error) {
-            console.log(error);
-        }
     };
 
     return (
@@ -79,7 +85,7 @@ export const CreateServerModal = () => {
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-400">
+                    <DialogDescription className="text-center text-zinc-500">
                         Give your server a personality with a name and an image.
                         You can always change it later.
                     </DialogDescription>
@@ -129,9 +135,9 @@ export const CreateServerModal = () => {
                                 )}
                             />
                         </div>
-                        <DialogFooter className="bg-accent px-6 py-4">
+                        <DialogFooter className="bg-muted px-6 py-4">
                             <Button variant="primary" disabled={isLoading}>
-                                Create
+                                Save
                             </Button>
                         </DialogFooter>
                     </form>

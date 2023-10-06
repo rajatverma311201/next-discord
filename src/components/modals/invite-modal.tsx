@@ -53,7 +53,7 @@ export const InviteModal = () => {
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
-            <DialogContent className="overflow-hidden bg-secondary p-0 text-foreground">
+            <DialogContent className="overflow-hidden bg-background p-0 text-foreground">
                 <DialogHeader className="px-6 pt-8">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Invite Friends
@@ -66,14 +66,14 @@ export const InviteModal = () => {
                     <div className="mt-2 flex items-center gap-x-2">
                         <Input
                             disabled={isLoading}
-                            className="border-0 bg-card text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
+                            className="border-0 bg-muted text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
                             value={inviteUrl}
                         />
                         <Button
                             disabled={isLoading}
                             onClick={onCopy}
                             size="icon"
-                            className="bg-card text-primary hover:bg-card focus-visible:ring-0 focus-visible:ring-offset-0"
+                            className="bg-muted text-primary hover:bg-background focus-visible:ring-0 focus-visible:ring-offset-0"
                         >
                             {copied ? (
                                 <Check className="h-4 w-4" />

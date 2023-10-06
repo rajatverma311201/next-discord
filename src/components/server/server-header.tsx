@@ -53,7 +53,7 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
                 )}
                 {isAdmin && (
                     <DropdownMenuItem
-                        // onClick={() => onOpen("editServer", { server })}
+                        onClick={() => onOpen("editServer", { server })}
                         className="cursor-pointer px-3 py-2 text-sm"
                     >
                         Server Settings
@@ -62,7 +62,7 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
                 )}
                 {isAdmin && (
                     <DropdownMenuItem
-                        // onClick={() => onOpen("members", { server })}
+                        onClick={() => onOpen("members", { server })}
                         className="cursor-pointer px-3 py-2 text-sm"
                     >
                         Manage Members

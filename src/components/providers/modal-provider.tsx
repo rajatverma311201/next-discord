@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from "react";
 
-import { CreateServerModal, InviteModal } from "@/components/modals";
+import {
+    CreateServerModal,
+    EditServerModal,
+    InviteModal,
+    MembersModal,
+} from "@/components/modals";
 // import { EditServerModal } from "@/components/modals/edit-server-modal";
 // import { InviteModal } from "@/components/modals/invite-modal";
 // import { MembersModal } from "@/components/modals/members-modal";
@@ -28,17 +33,18 @@ export const ModalProvider = () => {
     return (
         <>
             <CreateServerModal />
-            <InviteModal />
-            {/* 
             <EditServerModal />
+            <InviteModal />
             <MembersModal />
+            {/* 
             <CreateChannelModal />
             <LeaveServerModal />
             <DeleteServerModal />
             <DeleteChannelModal />
             <EditChannelModal />
             <MessageFileModal />
-            <DeleteMessageModal /> */}
+            <DeleteMessageModal />
+             */}
         </>
     );
 };
