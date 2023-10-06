@@ -1,2 +1,2 @@
-export { default as ModalProvider } from "./ModalProvider";
-export { default as ThemeProvider } from "./ThemeProvider";
+export * from "./modal-provider";
+export * from "./theme-provider";

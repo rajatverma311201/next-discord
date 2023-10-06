@@ -1,9 +1,13 @@
 import { NavigationSidebar } from "@/components/navigation";
-import { currentProfile } from "@/lib/currentProfile";
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 
-const MainLayout = async ({ children }: { children: React.ReactNode }) => {
+interface MainLayoutProps {
+    children: React.ReactNode;
+}
+
+const MainLayout: React.FC<MainLayoutProps> = async ({ children }) => {
     const profile = await currentProfile();
 
     if (!profile) {

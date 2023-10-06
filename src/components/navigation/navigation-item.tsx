@@ -12,7 +12,7 @@ interface NavigationItemProps {
     name: string;
 }
 
-const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
+export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
     const params = useParams();
     const router = useRouter();
 
@@ -46,5 +46,3 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         </ActionTooltip>
     );
 };
-
-export default NavigationItem;

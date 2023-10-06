@@ -1,3 +1,4 @@
-export { default as ActionTooltip } from "./ActionTooltip";
-export { default as FileUpload } from "./FileUpload";
-export { default as ThemeToggle } from "./ThemeToggle";
+export * from "./action-tooltip";
+export * from "./file-upload";
+export * from "./theme-toggle";
+export * from "./user-avatar";

@@ -38,7 +38,7 @@ const formSchema = z.object({
     }),
 });
 
-export default function InitialModal() {
+export const InitialModal = () => {
     const [isMounted, setIsMounted] = useState(false);
 
     const router = useRouter();
@@ -75,7 +75,7 @@ export default function InitialModal() {
 
     return (
         <Dialog open={true}>
-            <DialogContent className="overflow-hidden bg-white p-0 text-black">
+            <DialogContent className="overflow-hidden bg-card p-0 text-foreground">
                 <DialogHeader className="px-6 pt-8">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
@@ -114,13 +114,13 @@ export default function InitialModal() {
                                 name="name"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
+                                        <FormLabel className="text-xs font-bold uppercase text-accent-foreground ">
                                             Server name
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 disabled={isLoading}
-                                                className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                                                className="border-0 bg-secondary text-accent-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
                                                 placeholder="Enter server name"
                                                 {...field}
                                             />
@@ -130,7 +130,7 @@ export default function InitialModal() {
                                 )}
                             />
                         </div>
-                        <DialogFooter className="bg-gray-100 px-6 py-4">
+                        <DialogFooter className="bg-accent px-6 py-4">
                             <Button variant="primary" disabled={isLoading}>
                                 Create
                             </Button>
@@ -140,4 +140,4 @@ export default function InitialModal() {
             </DialogContent>
         </Dialog>
     );
-}
+};
