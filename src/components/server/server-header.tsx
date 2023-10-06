@@ -71,7 +71,7 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
                 )}
                 {isModerator && (
                     <DropdownMenuItem
-                        // onClick={() => onOpen("createChannel")}
+                        onClick={() => onOpen("createChannel")}
                         className="cursor-pointer px-3 py-2 text-sm"
                     >
                         Create Channel
@@ -90,7 +90,7 @@ export const ServerHeader: React.FC<ServerHeaderProps> = ({ server, role }) => {
                 )}
                 {!isAdmin && (
                     <DropdownMenuItem
-                        // onClick={() => onOpen("leaveServer", { server })}
+                        onClick={() => onOpen("leaveServer", { server })}
                         className="cursor-pointer px-3 py-2 text-sm text-rose-500"
                     >
                         Leave Server
