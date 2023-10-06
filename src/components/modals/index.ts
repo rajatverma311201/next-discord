@@ -1,2 +1,3 @@
-export { default as InitialModal } from "./InitialModal";
-export { default as CreateServerModal } from "./CreateServerModal";
+export * from "./initial-modal";
+export * from "./create-server-modal";
+export * from "./invite-modal";

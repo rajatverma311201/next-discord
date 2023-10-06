@@ -1,3 +1,3 @@
-export { default as NavigationSidebar } from "./NavigationSidebar";
-export { default as NavigationAction } from "./NavigationAction";
-export { default as NavigationItem } from "./NavigationItem";
+export * from "./navigation-sidebar";
+export * from "./navigation-action";
+export * from "./navigation-item";

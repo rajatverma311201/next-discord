@@ -3,13 +3,19 @@ import { UserButton } from "@clerk/nextjs";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { currentProfile } from "@/lib/currentProfile";
+import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
-import ThemeToggle from "@/components/ThemeToggle";
+import { ThemeToggle } from "@/components";
 import { NavigationAction, NavigationItem } from ".";
 
-export default function NavigationSidebar({ servers }: { servers: any[] }) {
+interface NavigationSidebarProps {
+    servers: any[];
+}
+
+export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
+    servers,
+}) => {
     return (
         <div className="flex h-full w-full flex-col items-center space-y-4 bg-[#E3E5E8] py-3 text-primary dark:bg-[#1E1F22]">
             <NavigationAction />
@@ -38,4 +44,4 @@ export default function NavigationSidebar({ servers }: { servers: any[] }) {
             </div>
         </div>
     );
-}
+};

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,6 +27,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components";
+import { useModal } from "@/hooks";
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -38,14 +38,12 @@ const formSchema = z.object({
     }),
 });
 
-export default function InitialModal() {
-    const [isMounted, setIsMounted] = useState(false);
+export const CreateServerModal = () => {
+    const { isOpen, onClose, type } = useModal();
+
+    const isModalOpen = isOpen && type === "createServer";
 
     const router = useRouter();
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
 
     const form = useForm({
         resolver: zodResolver(formSchema),
@@ -57,30 +55,31 @@ export default function InitialModal() {
 
     const isLoading = form.formState.isSubmitting;
 
+    const handleClose = () => {
+        form.reset();
+        onClose();
+    };
+
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             await axios.post("/api/servers", values);
 
             form.reset();
             router.refresh();
-            window.location.reload();
+            handleClose();
         } catch (error) {
             console.log(error);
         }
     };
 
-    if (!isMounted) {
-        return null;
-    }
-
     return (
-        <Dialog open={true}>
-            <DialogContent className="overflow-hidden bg-white p-0 text-black">
+        <Dialog open={isModalOpen} onOpenChange={handleClose}>
+            <DialogContent className="overflow-hidden bg-background p-0 text-foreground">
                 <DialogHeader className="px-6 pt-8">
                     <DialogTitle className="text-center text-2xl font-bold">
                         Customize your server
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
+                    <DialogDescription className="text-center text-zinc-400">
                         Give your server a personality with a name and an image.
                         You can always change it later.
                     </DialogDescription>
@@ -114,13 +113,13 @@ export default function InitialModal() {
                                 name="name"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel className="text-xs font-bold uppercase text-zinc-500 dark:text-secondary/70">
+                                        <FormLabel className="text-xs font-bold uppercase text-zinc-500 ">
                                             Server name
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 disabled={isLoading}
-                                                className="border-0 bg-zinc-300/50 text-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                                                className="border-0 bg-secondary text-secondary-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
                                                 placeholder="Enter server name"
                                                 {...field}
                                             />
@@ -130,7 +129,7 @@ export default function InitialModal() {
                                 )}
                             />
                         </div>
-                        <DialogFooter className="bg-gray-100 px-6 py-4">
+                        <DialogFooter className="bg-background px-6 py-4">
                             <Button variant="primary" disabled={isLoading}>
                                 Create
                             </Button>
@@ -140,4 +139,4 @@ export default function InitialModal() {
             </DialogContent>
         </Dialog>
     );
-}
+};

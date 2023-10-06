@@ -1,6 +1,5 @@
 import { InitialModal } from "@/components/modals";
-import { db } from "@/lib/db";
-import { initialProfile } from "@/lib/initialProfile";
+import { db, initialProfile } from "@/lib";
 import { redirect } from "next/navigation";
 
 async function SetupPage() {

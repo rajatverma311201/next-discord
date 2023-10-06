@@ -5,7 +5,7 @@ import { Plus } from "lucide-react";
 import { ActionTooltip } from "@/components";
 import { useModal } from "@/hooks";
 
-const NavigationAction = () => {
+export const NavigationAction = () => {
     const { onOpen } = useModal();
 
     return (
@@ -26,5 +26,3 @@ const NavigationAction = () => {
         </div>
     );
 };
-
-export default NavigationAction;
