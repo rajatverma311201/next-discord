@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { currentProfile, db } from "@/lib";
 
 // import { ServerSection } from "./server-section";
-import { ServerSearch, ServerHeader, ServerChannel } from ".";
+import { ServerSearch, ServerHeader, ServerChannel, ServerSection } from ".";
 // import { ServerMember } from "./server-member";
 
 interface ServerSidebarProps {
@@ -130,12 +130,12 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                 <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
                 {!!textChannels?.length && (
                     <div className="mb-2">
-                        {/* <ServerSection
+                        <ServerSection
                             sectionType="channels"
                             channelType={ChannelType.TEXT}
                             role={role}
                             label="Text Channels"
-                        /> */}
+                        />
                         <div className="space-y-[2px]">
                             {textChannels.map((channel) => (
                                 <ServerChannel
@@ -150,12 +150,12 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                 )}
                 {!!audioChannels?.length && (
                     <div className="mb-2">
-                        {/* <ServerSection
+                        <ServerSection
                             sectionType="channels"
                             channelType={ChannelType.AUDIO}
                             role={role}
                             label="Voice Channels"
-                        /> */}
+                        />
                         <div className="space-y-[2px]">
                             {audioChannels.map((channel) => (
                                 <ServerChannel
@@ -170,12 +170,12 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                 )}
                 {!!videoChannels?.length && (
                     <div className="mb-2">
-                        {/* <ServerSection
+                        <ServerSection
                             sectionType="channels"
                             channelType={ChannelType.VIDEO}
                             role={role}
                             label="Video Channels"
-                        /> */}
+                        />
                         <div className="space-y-[2px]">
                             {videoChannels.map((channel) => (
                                 <ServerChannel
@@ -190,12 +190,12 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                 )}
                 {!!members?.length && (
                     <div className="mb-2">
-                        {/* <ServerSection
+                        <ServerSection
                             sectionType="members"
                             role={role}
                             label="Members"
                             server={server}
-                        /> */}
+                        />
                         {/* <div className="space-y-[2px]">
                             {members.map((member) => (
                                 <ServerMember
