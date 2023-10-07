@@ -4,7 +4,11 @@ import { Open_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { cn } from "@/lib";
-import { ModalProvider, ThemeProvider } from "@/components/providers";
+import {
+    ModalProvider,
+    SocketProvider,
+    ThemeProvider,
+} from "@/components/providers";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -33,8 +37,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                         enableSystem={false}
                         storageKey="next-discord-theme"
                     >
-                        <ModalProvider />
-                        {children}
+                        <SocketProvider>
+                            <ModalProvider />
+                            {children}
+                        </SocketProvider>
                     </ThemeProvider>
                 </body>
             </html>

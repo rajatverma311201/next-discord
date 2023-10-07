@@ -1,3 +1,4 @@
+export * from "./conversation";
 export * from "./current-profile";
 export * from "./db";
 export * from "./initial-profile";
