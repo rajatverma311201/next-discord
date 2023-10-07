@@ -6,9 +6,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { currentProfile, db } from "@/lib";
 
-// import { ServerSection } from "./server-section";
-import { ServerSearch, ServerHeader, ServerChannel, ServerSection } from ".";
-// import { ServerMember } from "./server-member";
+import {
+    ServerSearch,
+    ServerHeader,
+    ServerChannel,
+    ServerSection,
+    ServerMember,
+} from ".";
 
 interface ServerSidebarProps {
     serverId: string;
@@ -196,7 +200,7 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                             label="Members"
                             server={server}
                         />
-                        {/* <div className="space-y-[2px]">
+                        <div className="space-y-[2px]">
                             {members.map((member) => (
                                 <ServerMember
                                     key={member.id}
@@ -204,7 +208,7 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                                     server={server}
                                 />
                             ))}
-                        </div> */}
+                        </div>
                     </div>
                 )}
             </ScrollArea>

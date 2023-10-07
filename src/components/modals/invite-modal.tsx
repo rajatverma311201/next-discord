@@ -65,6 +65,7 @@ export const InviteModal = () => {
                     </Label>
                     <div className="mt-2 flex items-center gap-x-2">
                         <Input
+                            readOnly
                             disabled={isLoading}
                             className="border-0 bg-muted text-muted-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
                             value={inviteUrl}

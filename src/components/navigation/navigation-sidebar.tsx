@@ -7,20 +7,31 @@ import { currentProfile, db } from "@/lib";
 
 import { ThemeToggle } from "@/components";
 import { NavigationAction, NavigationItem } from ".";
+// import { NavigationAction, NavigationItem } from ".";
 
-interface NavigationSidebarProps {
-    servers: any[];
-}
+export const NavigationSidebar = async () => {
+    const profile = await currentProfile();
 
-export const NavigationSidebar: React.FC<NavigationSidebarProps> = ({
-    servers,
-}) => {
+    if (!profile) {
+        return redirect("/");
+    }
+
+    const servers = await db.server.findMany({
+        where: {
+            members: {
+                some: {
+                    profileId: profile.id,
+                },
+            },
+        },
+    });
+
     return (
         <div className="flex h-full w-full flex-col items-center space-y-4 bg-[#E3E5E8] py-3 text-primary dark:bg-[#1E1F22]">
             <NavigationAction />
             <Separator className="mx-auto h-[2px] w-10 rounded-md bg-zinc-300 dark:bg-zinc-700" />
             <ScrollArea className="w-full flex-1">
-                {servers.map((server) => (
+                {servers?.map((server) => (
                     <div key={server.id} className="mb-4">
                         <NavigationItem
                             id={server.id}
