@@ -1,6 +1,6 @@
 import { NavigationSidebar } from "@/components/navigation";
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { currentProfile, db } from "@/lib";
+
 import { redirect } from "next/navigation";
 
 interface MainLayoutProps {

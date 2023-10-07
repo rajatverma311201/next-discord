@@ -4,13 +4,10 @@ import { Hash, Mic, ShieldAlert, ShieldCheck, Video } from "lucide-react";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
-import { currentProfile } from "@/lib/current-profile";
-import { db } from "@/lib/db";
+import { currentProfile, db } from "@/lib";
 
-import { ServerHeader } from "./server-header";
-// import { ServerSearch } from "./server-search";
 // import { ServerSection } from "./server-section";
-import { ServerChannel } from "./server-channel";
+import { ServerSearch, ServerHeader, ServerChannel } from ".";
 // import { ServerMember } from "./server-member";
 
 interface ServerSidebarProps {
@@ -88,7 +85,7 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
         <div className="flex h-full w-full flex-col bg-[#F2F3F5] text-primary dark:bg-[#2B2D31]">
             <ServerHeader server={server} role={role} />
             <ScrollArea className="flex-1 px-3">
-                {/* <div className="mt-2">
+                <div className="mt-2">
                     <ServerSearch
                         data={[
                             {
@@ -129,7 +126,7 @@ export const ServerSidebar: React.FC<ServerSidebarProps> = async ({
                             },
                         ]}
                     />
-                </div> */}
+                </div>
                 <Separator className="my-2 rounded-md bg-zinc-200 dark:bg-zinc-700" />
                 {!!textChannels?.length && (
                     <div className="mb-2">
