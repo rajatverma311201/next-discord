@@ -1,5 +1,4 @@
-import { ChatHeader, ChatInput } from "@/components/chat";
-import ChatMessages from "@/components/chat/chat-messages";
+import { ChatHeader, ChatInput, ChatMessages } from "@/components/chat";
 import { currentProfile, db } from "@/lib";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
