@@ -5,7 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { cn } from "@/lib";
 import {
-    ModalProvider,
+    // ModalProvider,
     SocketProvider,
     ThemeProvider,
 } from "@/components/providers";
@@ -37,10 +37,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                         enableSystem={false}
                         storageKey="next-discord-theme"
                     >
-                        <SocketProvider>
-                            <ModalProvider />
-                            {children}
-                        </SocketProvider>
+                        {/* <SocketProvider> */}
+                        {/* <ModalProvider /> */}
+                        {children}
+                        {/* </SocketProvider> */}
                     </ThemeProvider>
                 </body>
             </html>

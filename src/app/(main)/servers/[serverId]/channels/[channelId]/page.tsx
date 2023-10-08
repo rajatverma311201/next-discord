@@ -1,8 +1,7 @@
-import { ChatHeader } from "@/components/chat";
+import { ChatHeader, ChatInput } from "@/components/chat";
 import { currentProfile, db } from "@/lib";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-import React from "react";
 
 interface ChannelIdPageProps {
     params: {
@@ -43,6 +42,15 @@ const ChannelIdPage: React.FC<ChannelIdPageProps> = async ({
                 serverId={serverId}
                 name={channel.name}
                 type="channel"
+            />
+            <ChatInput
+                name={channel.name}
+                type="channel"
+                apiUrl="/api/socket/messages"
+                query={{
+                    channelId: channel.id,
+                    serverId: channel.serverId,
+                }}
             />
         </div>
     );
