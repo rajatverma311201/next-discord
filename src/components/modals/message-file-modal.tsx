@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,58 +27,63 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components";
+import { useModal } from "@/hooks";
+import qs from "query-string";
 
 const formSchema = z.object({
-    name: z.string().min(1, {
-        message: "Server name is required.",
-    }),
-    imageUrl: z.string().min(1, {
-        message: "Server image is required.",
+    fileUrl: z.string().min(1, {
+        message: "Attachment is required.",
     }),
 });
 
-export const InitialModal = () => {
+export const MessageFileModal = () => {
+    const { isOpen, onClose, type, data } = useModal();
+
+    const { apiUrl, query } = data;
+    const isModalOpen = isOpen && type === "messageFile";
+
     const router = useRouter();
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
-            imageUrl: "",
+            fileUrl: "",
         },
     });
 
     const isLoading = form.formState.isSubmitting;
 
-    const [isMounted, setIsMounted] = useState(false);
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
-    if (!isMounted) {
-        return null;
-    }
-    const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        try {
-            await axios.post("/api/servers", values);
+    const handleClose = () => {
+        form.reset();
+        onClose();
+    };
 
-            form.reset();
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        const url = qs.stringifyUrl({
+            url: apiUrl || "",
+            query,
+        });
+
+        try {
+            await axios.post(url, { ...values, content: values.fileUrl });
+
             router.refresh();
-            window.location.reload();
+            handleClose();
         } catch (error) {
             console.log(error);
         }
     };
 
     return (
-        <Dialog open={true}>
-            <DialogContent className="overflow-hidden bg-card p-0 text-foreground">
+        <Dialog open={isModalOpen} onOpenChange={handleClose}>
+            <DialogContent className="overflow-hidden bg-background p-0 text-foreground">
                 <DialogHeader className="px-6 pt-8">
                     <DialogTitle className="text-center text-2xl font-bold">
-                        Customize your server
+                        Add an attachment{" "}
                     </DialogTitle>
-                    <DialogDescription className="text-center text-zinc-500">
-                        Give your server a personality with a name and an image.
-                        You can always change it later.
+                    <DialogDescription className="text-center text-zinc-400">
+                        Send a file as a message
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
@@ -88,15 +92,15 @@ export const InitialModal = () => {
                         className="space-y-8"
                     >
                         <div className="space-y-8 px-6">
-                            <div className="flex items-center justify-center text-center">
+                            <div className="flex  items-center justify-center rounded bg-secondary text-center">
                                 <FormField
                                     control={form.control}
-                                    name="imageUrl"
+                                    name="fileUrl"
                                     render={({ field }) => (
                                         <FormItem>
                                             <FormControl>
                                                 <FileUpload
-                                                    endpoint="serverImage"
+                                                    endpoint="messageFile"
                                                     value={field.value}
                                                     onChange={field.onChange}
                                                 />
@@ -105,31 +109,10 @@ export const InitialModal = () => {
                                     )}
                                 />
                             </div>
-
-                            <FormField
-                                control={form.control}
-                                name="name"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel className="text-xs font-bold uppercase text-muted-foreground ">
-                                            Server name
-                                        </FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                disabled={isLoading}
-                                                className="border-0 bg-secondary text-accent-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
-                                                placeholder="Enter server name"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
                         </div>
                         <DialogFooter className="bg-accent px-6 py-4">
                             <Button variant="primary" disabled={isLoading}>
-                                Create
+                                Send
                             </Button>
                         </DialogFooter>
                     </form>

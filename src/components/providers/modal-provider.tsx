@@ -12,9 +12,10 @@ import {
     MembersModal,
     LeaveServerModal,
     DeleteServerModal,
+    MessageFileModal,
 } from "@/components/modals";
 
-export const ModalProvider = () => {
+export function ModalProvider() {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
@@ -36,10 +37,10 @@ export const ModalProvider = () => {
             <InviteModal />
             <LeaveServerModal />
             <MembersModal />
-            {/* 
             <MessageFileModal />
+            {/* 
             <DeleteMessageModal />
              */}
         </>
     );
-};
+}

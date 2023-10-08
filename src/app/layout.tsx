@@ -5,10 +5,11 @@ import { ClerkProvider } from "@clerk/nextjs";
 
 import { cn } from "@/lib";
 import {
-    // ModalProvider,
+    ModalProvider,
     SocketProvider,
     ThemeProvider,
 } from "@/components/providers";
+import { QueryProvider } from "@/components/providers/query-provider";
 
 const font = Open_Sans({ subsets: ["latin"] });
 
@@ -37,10 +38,10 @@ const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
                         enableSystem={false}
                         storageKey="next-discord-theme"
                     >
-                        {/* <SocketProvider> */}
-                        {/* <ModalProvider /> */}
-                        {children}
-                        {/* </SocketProvider> */}
+                        <SocketProvider>
+                            <ModalProvider />
+                            <QueryProvider>{children}</QueryProvider>
+                        </SocketProvider>
                     </ThemeProvider>
                 </body>
             </html>

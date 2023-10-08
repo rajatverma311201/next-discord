@@ -8,3 +8,4 @@ export * from "./initial-modal";
 export * from "./invite-modal";
 export * from "./leave-server-modal";
 export * from "./members-modal";
+export * from "./message-file-modal";

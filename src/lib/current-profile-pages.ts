@@ -1,3 +1,4 @@
+"use server";
 import { NextApiRequest } from "next";
 import { getAuth } from "@clerk/nextjs/server";
 

@@ -28,6 +28,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { FileUpload } from "@/components";
 import { useModal } from "@/hooks";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
     name: z.string().min(1, {
@@ -54,6 +55,14 @@ export const CreateServerModal = () => {
     });
 
     const isLoading = form.formState.isSubmitting;
+
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+    if (!isMounted) {
+        return null;
+    }
 
     const handleClose = () => {
         form.reset();

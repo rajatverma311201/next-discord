@@ -33,7 +33,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const formSchema = z.object({
     name: z
@@ -70,6 +70,14 @@ export const CreateChannelModal = () => {
             form.setValue("type", ChannelType.TEXT);
         }
     }, [channelType, form]);
+
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
+    if (!isMounted) {
+        return null;
+    }
 
     const isLoading = form.formState.isSubmitting;
 

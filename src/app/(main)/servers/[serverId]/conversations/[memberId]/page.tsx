@@ -1,4 +1,5 @@
-import { ChatHeader } from "@/components/chat";
+import { ChatHeader, ChatInput } from "@/components/chat";
+import ChatMessages from "@/components/chat/chat-messages";
 import { currentProfile, db, getOrCreateConversation } from "@/lib";
 import { redirectToSignIn } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
@@ -55,6 +56,27 @@ const MemberIdPage: React.FC<MemberIdPageProps> = async ({
                 imageUrl={otherMember.profile?.imageUrl as string}
             />
             <h1>CONVERSATION START</h1>
+            <ChatMessages
+                member={currentMember}
+                name={otherMember.profile.name}
+                chatId={conversation.id}
+                type="conversation"
+                apiUrl="/api/direct-messages"
+                paramKey="conversationId"
+                paramValue={conversation.id}
+                socketUrl="/api/socket/direct-messages"
+                socketQuery={{
+                    conversationId: conversation.id,
+                }}
+            />
+            <ChatInput
+                name={otherMember.profile.name}
+                type="conversation"
+                apiUrl="/api/socket/direct-messages"
+                query={{
+                    conversationId: conversation.id,
+                }}
+            />
         </div>
     );
 };
