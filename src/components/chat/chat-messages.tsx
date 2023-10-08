@@ -3,7 +3,7 @@ import { Member, Message, Profile } from "@prisma/client";
 import React, { Fragment } from "react";
 import { ChatItem, ChatWelcome } from ".";
 import { getAddKey, getQueryKey, getUpdateKey } from "@/lib";
-import { useChatQuery } from "@/hooks";
+import { useChatQuery, useChatSocket } from "@/hooks";
 import { Loader2, ServerCrash } from "lucide-react";
 import { format } from "date-fns";
 
@@ -49,6 +49,8 @@ export function ChatMessages({
             paramKey,
             paramValue,
         });
+
+    useChatSocket({ addKey, updateKey, queryKey });
 
     if (status === "loading") {
         return (

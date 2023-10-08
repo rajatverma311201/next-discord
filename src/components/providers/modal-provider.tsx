@@ -13,6 +13,7 @@ import {
     LeaveServerModal,
     DeleteServerModal,
     MessageFileModal,
+    DeleteMessageModal,
 } from "@/components/modals";
 
 export function ModalProvider() {
@@ -38,9 +39,7 @@ export function ModalProvider() {
             <LeaveServerModal />
             <MembersModal />
             <MessageFileModal />
-            {/* 
             <DeleteMessageModal />
-             */}
         </>
     );
 }

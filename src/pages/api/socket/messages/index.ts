@@ -2,7 +2,7 @@ import { NextApiRequest } from "next";
 
 import { NextApiResponseServerIo } from "@/types";
 import { db } from "@/lib/db";
-import { currentProfilePages, getChannelKey } from "@/lib";
+import { currentProfilePages, getChatKey } from "@/lib";
 
 export default async function handler(
     req: NextApiRequest,
@@ -86,7 +86,7 @@ export default async function handler(
             },
         });
 
-        const channelKey = getChannelKey(channelId as string);
+        const channelKey = getChatKey(channelId as string);
 
         res?.socket?.server?.io?.emit(channelKey, message);
 

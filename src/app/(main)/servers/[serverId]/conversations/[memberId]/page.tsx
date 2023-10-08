@@ -54,7 +54,6 @@ const MemberIdPage: React.FC<MemberIdPageProps> = async ({
                 type="conversation"
                 imageUrl={otherMember.profile?.imageUrl as string}
             />
-            <h1>CONVERSATION START</h1>
             <ChatMessages
                 member={currentMember}
                 name={otherMember.profile.name}
